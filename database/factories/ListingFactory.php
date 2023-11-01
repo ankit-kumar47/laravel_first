@@ -9,15 +9,21 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ListingFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
-    {
-        return [
-            //
-        ];
-    }
+  /**
+   * Define the model's default state.
+   *
+   * @return array<string, mixed>
+   */
+  public function definition(): array
+  {
+    return [
+      'title' => $this->faker->sentence(),
+      'tags' => 'laravel, javascript',
+      'company' => $this->faker->company(),
+      'location' => $this->faker->city(),
+      'email' => $this->faker->email(),
+      'website' => $this->faker->url(),
+      'description' => $this->faker->paragraph()
+    ];
+  }
 }

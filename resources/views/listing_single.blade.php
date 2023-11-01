@@ -1,20 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout')
+@section('content')
+    <div class="mx-4">
+        @unless (empty($listing))
+            <div class="bg-gray-50 border border-gray-200 p-10 rounded">
+                <div class="flex flex-col items-center justify-center text-center">
+                    <img class="w-48 mr-6 mb-6" src={{ $listing->images ? $listing->images : asset('images/no-image.png') }}
+                        alt="" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $listing['title'] }}</title>
-</head>
+                    <h3 class="text-2xl mb-2">{{ $listing->title }}</h3>
+                    <div class="text-xl font-bold mb-4">Acme Corp</div>
+                    <ul class="flex">
 
-<body>
-    @unless (empty($listing))
-        <h1>{{ $listing['title'] }}</h1>
-        <p>{{ $listing['description'] }}</p>
-    @else
-        <p>No data found</p>
-    @endunless
-</body>
+                        @include('partials._tags', [$listing->tags])
+                    </ul>
+                    <div class="text-lg my-4">
+                        <i class="fa-solid fa-location-dot"></i> {{ $listing->location }}
+                    </div>
+                    <div class="border border-gray-200 w-full mb-6"></div>
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4">
+                            Job Description
+                        </h3>
+                        <div class="text-lg space-y-6">
+                            <p>
+                                {{ $listing->description }}
+                            </p>
+                            <p>
+                                {{ $listing->description }}
+                            </p>
 
-</html>
+                            <a href="mailto:test@test.com"
+                                class="block bg-laravel text-white mt-6 py-2 rounded-xl hover:opacity-80"><i
+                                    class="fa-solid fa-envelope"></i>
+                                Contact Employer</a>
+
+                            <a href="{{ $listing->website }}" target="_blank"
+                                class="block bg-black text-white py-2 rounded-xl hover:opacity-80"><i
+                                    class="fa-solid fa-globe"></i> Visit
+                                Website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @else
+            <p>No data found</p>
+        @endunless
+    </div>
+@endsection

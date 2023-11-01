@@ -43,6 +43,9 @@
         </ul>
     </nav>
     <main>
+        @if (url()->current() != env('APP_URL'))
+            @include('partials._back')
+        @endif
         @yield('content')
     </main>
 

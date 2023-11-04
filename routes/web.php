@@ -33,13 +33,13 @@ Route::get('/manage', function () {
     'listings' => Listing::all(),
   ]);
 });
-Route::get('/listing/{id}', function ($id) {
+Route::get('/listing/{listing}', function (Listing $listing) {
   return view('listing_single', [
-    'listing' => Listing::find($id)
+    'listing' => $listing
   ]);
 });
-Route::get('/edit/{id}', function ($id) {
+Route::get('/edit/{listing}', function (Listing $listing) {
   return view('edit', [
-    'listing' => Listing::find($id)
+    'listing' => $listing
   ]);
 });

@@ -29,7 +29,7 @@
                                 {{ $listing->description }}
                             </p>
 
-                            <a href="mailto:test@test.com"
+                            <a href="mailto:{{ $listing->email }}"
                                 class="block bg-laravel text-white mt-6 py-2 rounded-xl hover:opacity-80"><i
                                     class="fa-solid fa-envelope"></i>
                                 Contact Employer</a>
@@ -43,7 +43,10 @@
                 </div>
             </div>
         @else
-            <p>No data found</p>
+            {{-- @php
+                abort('404');
+            @endphp --}}
+            none
         @endunless
     </div>
 @endsection

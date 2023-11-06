@@ -18,12 +18,13 @@ class ListingFactory extends Factory
   {
     return [
       'title' => $this->faker->sentence(),
+      'logo' => $this->faker->imageUrl(),
       'tags' => 'laravel, javascript',
       'company' => $this->faker->company(),
       'location' => $this->faker->city(),
       'email' => $this->faker->email(),
       'website' => $this->faker->url(),
-      'description' => $this->faker->paragraph()
+      'description' => $this->faker->paragraph(),
     ];
   }
 }

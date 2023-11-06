@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -25,7 +26,7 @@
 </head>
 
 <body class="mb-48">
-
+    <x-flash-message />
 
     <nav class="flex justify-between items-center mb-4">
         <a href="{{ env('APP_URL') }}"><img class="w-24" src={{ asset('images/logo.png') }} alt=""
@@ -44,13 +45,13 @@
     </nav>
     <main>
         @if (url()->current() != env('APP_URL'))
-            @include('partials._back')
+            <x-back-button />
         @endif
         @yield('content')
     </main>
 
     @include('partials._footer')
-
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>

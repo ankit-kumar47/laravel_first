@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
 
@@ -13,33 +14,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-  return view('listing', [
-    'listings' => Listing::all(),
-  ]);
-});
-Route::get('/register', function () {
-  return view('register');
-});
-Route::get('/login', function () {
-  return view('login');
-});
-Route::get('/post_job', function () {
-  return view('post_job');
-});
-Route::get('/manage', function () {
-  return view('manage', [
-    'listings' => Listing::all(),
-  ]);
-});
-Route::get('/listing/{listing}', function (Listing $listing) {
-  return view('listing_single', [
-    'listing' => $listing
-  ]);
-});
-Route::get('/edit/{listing}', function (Listing $listing) {
-  return view('edit', [
-    'listing' => $listing
-  ]);
-});
+//Home page
+Route::get('/', [ListingController::class, 'index']);
+//Shows Create Form
+Route::get('/listing/create', [ListingController::class, 'create']);
+//Stores the Data
+Route::post('/listing', [ListingController::class, 'store']);
+//Show Edit form
+Route::get('/listing/{listing}/edit', [ListingController::class, 'edit']);
+//Upadte Listing
+Route::put('/listing/{listing}', [ListingController::class, 'update']);
+//Delete Listing
+Route::delete('/listing/{listing}', [ListingController::class, 'destroy']);
+//Shows Single Listing
+Route::get('/listing/{listing}', [ListingController::class, 'show']);

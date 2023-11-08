@@ -95,7 +95,7 @@
                         Create Gig
                     </button>
 
-                    <a href="{{ env('APP_URL') }}" class="text-black ml-4"> Back </a>
+                    <a href="{{ back()->getTargetUrl() }}" class="text-black ml-4"> Back </a>
                 </div>
             </form>
         </x-card>

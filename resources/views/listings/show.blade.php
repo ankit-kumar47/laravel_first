@@ -5,7 +5,7 @@
             <x-card class="p-10">
                 <div class="flex flex-col items-center justify-center text-center">
                     <img class="w-48 mr-6 mb-6"
-                        src={{ $listing->logo ? asset('storage/' . $listing->logo) : asset('images/no-image.png') }}
+                        src={{ $listing->logo ? (asset('storage/' . $listing->logo) ? $listing->logo : asset('images/no-image.png')) : asset('images/no-image.png') }}
                         alt="" />
 
                     <h3 class="text-2xl mb-2">{{ $listing->title }}</h3>
@@ -38,16 +38,18 @@
                                 class="block bg-black text-white py-2 rounded-xl hover:opacity-80"><i
                                     class="fa-solid fa-globe"></i> Visit
                                 Website</a>
+                            @auth
 
-                            <a href="{{ env('APP_URL') }}/listing/{{ $listing->id }}/edit"
-                                class="block bg-orange-600 text-white py-2 rounded-xl hover:opacity-80"><i
-                                    class="fa-solid fa-pencil"></i> Edit</a>
-                            <form action="{{ env('APP_URL') }}/listing/{{ $listing->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="bg-red-600 text-white py-2 rounded-xl hover:opacity-80 w-full"><i
-                                        class="fa-solid fa-trash"></i> Delete</button>
-                            </form>
+                                <a href="{{ env('APP_URL') }}/listing/{{ $listing->id }}/edit"
+                                    class="block bg-orange-600 text-white py-2 rounded-xl hover:opacity-80"><i
+                                        class="fa-solid fa-pencil"></i> Edit</a>
+                                <form action="{{ env('APP_URL') }}/listing/{{ $listing->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="bg-red-600 text-white py-2 rounded-xl hover:opacity-80 w-full"><i
+                                            class="fa-solid fa-trash"></i> Delete</button>
+                                </form>
+                            @endauth
                         </div>
                     </div>
             </x-card>

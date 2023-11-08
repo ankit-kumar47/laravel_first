@@ -32,15 +32,49 @@
         <a href="{{ env('APP_URL') }}"><img class="w-24" src={{ asset('images/logo.png') }} alt=""
                 class="logo" /></a>
         <ul class="flex space-x-6 mr-6 text-lg">
-            <li>
-                <a href="{{ env('APP_URL') }}/register" class="hover:text-laravel"><i class="fa-solid fa-user-plus"></i>
-                    Register</a>
-            </li>
-            <li>
-                <a href="{{ env('APP_URL') }}/login" class="hover:text-laravel"><i
-                        class="fa-solid fa-arrow-right-to-bracket"></i>
-                    Login</a>
-            </li>
+            @auth
+                <li>
+                    <a href="{{ env('APP_URL') }}/users/profile" class="hover:text-laravel">
+                        <h3>Welcome {{ auth()->user()->name }} </h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ env('APP_URL') }}/listing/manage" class="hover:text-laravel"><i
+                            class="fa-solid fa-gear"></i>
+                        Manage Listings</a>
+                </li>
+                <li>
+                    <form action="{{ env('APP_URL') }}/logout" method="post">
+                        @csrf
+                        <button class="hover:text-laravel"><i class="fa-solid fa-door-closed"></i>Logout</button>
+                    </form>
+                </li>
+            @else
+                @if (url()->current() == env('APP_URL') . '/register')
+                    <li>
+                        <a href="{{ env('APP_URL') }}/signin" class="hover:text-laravel"><i
+                                class="fa-solid fa-arrow-right-to-bracket"></i>
+                            Login</a>
+                    </li>
+                @elseif (url()->current() == env('APP_URL') . '/signin')
+                    <li>
+                        <a href="{{ env('APP_URL') }}/register" class="hover:text-laravel"><i
+                                class="fa-solid fa-user-plus"></i>
+                            Register</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ env('APP_URL') }}/register" class="hover:text-laravel"><i
+                                class="fa-solid fa-user-plus"></i>
+                            Register</a>
+                    </li>
+                    <li>
+                        <a href="{{ env('APP_URL') }}/signin" class="hover:text-laravel"><i
+                                class="fa-solid fa-arrow-right-to-bracket"></i>
+                            Login</a>
+                    </li>
+                @endif
+            @endauth
         </ul>
     </nav>
     <main>
